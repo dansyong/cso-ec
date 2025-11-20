@@ -7,18 +7,14 @@ int main () {
     char binary[500],hexadecimal[100];
     int i = 0,j = 0;
     int temp = decimalNumber;
-    
     if (temp == 0) {
         printf("Hexadecimal = 0\n");
         printf("Binary = 0\n");
         return 0;
     }
-    
     while (temp > 0) {
         int remainder = temp % 16;
-        // In the wrong version, the remainder is changed to 'remainder <= 10' which is a logic error。
-        // Only 0-9 should be handled this way.
-        if (remainder < 10) { 
+        if (remainder < 10) { // In the wrong version, the remainder is changed to 'remainder <= 10' which is a logic error。
             hexadecimal[i] = remainder + '0';
         } else {
             hexadecimal[i] = remainder - 10 + 'A';
@@ -26,10 +22,7 @@ int main () {
         temp /= 16;
         i++;
     }
-    
-    // In the error version, the line 'temp = decimalNumber;' was deleted here, causing incorrect results for binary conversion.
-    temp = decimalNumber; 
-    
+    temp = decimalNumber;  // In the error version, the line 'temp = decimalNumber;' was deleted here, causing incorrect results for binary conversion.
     while (temp > 0) {
         int remainder = temp % 2;
         if (remainder == 1) {
@@ -38,10 +31,8 @@ int main () {
             binary[j] = '0';
         }
         temp /= 2;
-        // In the error version, the line 'j++;' was deleted here, causing an infinite loop.
-        j++; 
+        j++; // In the error version, the line 'j++;' was deleted here, causing an infinite loop.
     }
-    
     printf("hexadecimal conversion = ");
     // In the incorrect version, the loop starts with 'int k = i' and the condition is 'k >= 0' (logical error).
     // The correct start is i-1, and it ends at k >= 0 (i.e., index 0).
